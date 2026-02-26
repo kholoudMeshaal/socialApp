@@ -13,7 +13,7 @@ export default function Layout() {
     {/* <Register /> */}
       {token && <AppNavBar />}
       <main>
-        <div className='min-h-screen bg-gray-300 overflow-auto'>
+        <div className='min-h-screen bg-gray-300 pt-1'>
           <Outlet />
         </div>
       </main>

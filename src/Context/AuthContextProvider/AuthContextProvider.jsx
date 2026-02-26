@@ -11,14 +11,14 @@ export default function AuthContextProvider({children}) {
 
 
 const [userData, setUserData] = useState({});
-
+//من غير دي انا كل مره لازم اعمل لوج ان 
 const [token, setToken] = useState(() => localStorage.getItem('token'));
 
 
 
 /******************************************************/
 
-
+//المكان الي هستور فيه الداتا هو هو الي هستلم فيه التوكين 
     async function getUserData() {
       try {
         const response = await axios.get(
@@ -40,27 +40,14 @@ const [token, setToken] = useState(() => localStorage.getItem('token'));
 
 
 
-
+//بمنع ريريندر عمال علي بطال 
+//اتاكد ان في توكين قبل ما تكلم ال api 
     useEffect(() => {
         token && getUserData();
     },[token]);
 
 
 /******************************************************/
-
-
-
-//  function updateToken(newToken) {
-//         if (newToken) {
-//             localStorage.setItem('token', newToken);
-//             setToken(newToken);
-//         } else {
-//             localStorage.removeItem('token');
-//             setToken(null);
-//             setUserData(null);
-//         }
-//     }
-
 
 
 const hamada = {token ,  userData, setUserData, getUserData , setToken   }; 
