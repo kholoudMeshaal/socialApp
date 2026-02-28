@@ -8,6 +8,7 @@ import AuthProtectedRoute from "./AuthProtectedRoute/AuthProtectedRoute";
 import PostDetails from "../Pages/SinglePost/SinglePost";
 import ChangePassword from "../components/ChangePass/ChangePass";
 import Profile from "../components/Profile/Profile";
+// import Notification from "../Pages/Notfication/Notification";
 
 export const myRouter = createBrowserRouter([
 
@@ -39,7 +40,8 @@ export const myRouter = createBrowserRouter([
         element: <NotFound /> 
       },
       {path: "/change-password", element: <ChangePassword />} ,
-      { path: 'profile', element: <Profile /> }
+      { path: 'profile', element: <Profile /> } , 
+      // { path: 'notifications', element: <ProtectedRoute><Notification /></ProtectedRoute> }
     ]
   }
 ]);

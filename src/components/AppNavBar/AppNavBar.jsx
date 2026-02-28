@@ -94,6 +94,7 @@ myForm.append('photo' , profileImage.current.files[0])
          <NavLink className={function({isActive}){return isActive? "text-white p-2 rounded-full  bg-slate-400": "" }}  to="/profile">
             Profile
           </NavLink>
+           
     
       </NavbarContent>
 

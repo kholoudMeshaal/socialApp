@@ -6,8 +6,15 @@ import LoadingScreen from "../../Pages/LoadingScreen/LoadingScreen";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import PostCard from "../PostCard/PostCard";
+import { Modal, ModalContent, ModalHeader, ModalBody } from '@heroui/react';
+import { useState } from 'react';
 
 export default function Profile() {
+
+//مفيش endpoint ليها فا عملتها كشكل بس
+const [showFollowers, setShowFollowers] = useState(false);
+const [showFollowing, setShowFollowing] = useState(false);
+
   const { userData , token } = useContext(AuthUserContext);
 
 function getUserPosts() {
@@ -34,7 +41,7 @@ console.log("posts", posts);
 if (isLoading){
     return <LoadingScreen/>
 }
-
+console.log("userData", userData);
 
   return (
 <>
@@ -81,9 +88,93 @@ if (isLoading){
             <div className="text-sm leading-normal mt-0 mb-2 text-gray-400 font-bold uppercase">
             {userData.email}
             </div>
-            {/* <div className="mb-2 text-gray-600 mt-10">
-             {userData.dateOfBirth}
-            </div> */}
+
+            {/* بتعرضهم بس  */}
+{/* <div className="flex justify-center gap-4 mt-6 mb-4">
+    <div className="bg-white border border-gray-100 shadow-sm rounded-2xl px-8 py-4 text-center">
+        <p className="text-xs text-gray-400 font-bold uppercase tracking-wide">Followers</p>
+        <p className="text-3xl font-black text-gray-800 mt-1">{userData?.followersCount || 0}</p>
+    </div>
+    <div className="bg-white border border-gray-100 shadow-sm rounded-2xl px-8 py-4 text-center">
+        <p className="text-xs text-gray-400 font-bold uppercase tracking-wide">Following</p>
+        <p className="text-3xl font-black text-gray-800 mt-1">{userData?.followingCount || 0}</p>
+    </div>
+    <div className="bg-white border border-gray-100 shadow-sm rounded-2xl px-8 py-4 text-center">
+        <p className="text-xs text-gray-400 font-bold uppercase tracking-wide">Posts</p>
+        <p className="text-3xl font-black text-gray-800 mt-1">{posts?.length || 0}</p>
+    </div>
+</div> */}
+
+
+      
+{/* Stats */}
+<div className="flex justify-center gap-4 mt-6 mb-4 ">
+    
+    {/* Followers */}
+    <div 
+        onClick={() => setShowFollowers(true)}
+        className="bg-white border border-gray-100 shadow-sm rounded-2xl px-8 py-4 text-center cursor-pointer hover:bg-blue-50 transition-colors"
+    >
+        <p className="text-xs text-gray-400 font-bold uppercase tracking-wide">Followers</p>
+        <p className="text-3xl font-black text-gray-800 mt-1">{userData?.followersCount || 0}</p>
+    </div>
+
+    {/* Following */}
+    <div 
+        onClick={() => setShowFollowing(true)}
+        className="bg-white border border-gray-100 shadow-sm rounded-2xl px-8 py-4 text-center cursor-pointer hover:bg-blue-50 transition-colors"
+    >
+        <p className="text-xs text-gray-400 font-bold uppercase tracking-wide">Following</p>
+        <p className="text-3xl font-black text-gray-800 mt-1">{userData?.followingCount || 0}</p>
+    </div>
+
+    {/* Posts */}
+    <div className="bg-white border border-gray-100 shadow-sm rounded-2xl px-8 py-4 text-center">
+        <p className="text-xs text-gray-400 font-bold uppercase tracking-wide">Posts</p>
+        <p className="text-3xl font-black text-gray-800 mt-1">{posts?.length || 0}</p>
+    </div>
+</div>
+
+{/* Followers Modal */}
+<Modal className="overflow-y-auto max-h-100" isOpen={showFollowers} onClose={() => setShowFollowers(false)}>
+    <ModalContent>
+        <ModalHeader>Followers ({userData?.followersCount})</ModalHeader>
+        <ModalBody className="pb-6">
+            {userData?.followers?.length === 0 && (
+                <p className="text-center text-gray-400 py-4">No followers yet</p>
+            )}
+            {userData?.followers?.map((id) => (
+                <div key={id} className="flex items-center gap-3 py-2 border-b border-gray-100">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                        <span className="text-blue-600 text-xs font-bold">👤</span>
+                    </div>
+                    <p className="text-sm text-gray-500 font-mono">{id}</p>
+                </div>
+            ))}
+        </ModalBody>
+    </ModalContent>
+</Modal>
+
+{/* Following Modal */}
+<Modal className="max-h-100 overflow-y-auto" isOpen={showFollowing} onClose={() => setShowFollowing(false)}>
+    <ModalContent>
+        <ModalHeader>Following ({userData?.followingCount})</ModalHeader>
+        <ModalBody className="pb-6">
+            {userData?.following?.length === 0 && (
+                <p className="text-center text-gray-400 py-4">Not following anyone yet</p>
+            )}
+            {userData?.following?.map((id) => (
+                <div key={id} className="flex items-center gap-3 py-2 border-b border-gray-100">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                        <span className="text-blue-600 text-xs font-bold">👤</span>
+                    </div>
+                    <p className="text-sm text-gray-500 font-mono">{id}</p>
+                </div>
+            ))}
+        </ModalBody>
+    </ModalContent>
+</Modal>
+
 
           </div>
 

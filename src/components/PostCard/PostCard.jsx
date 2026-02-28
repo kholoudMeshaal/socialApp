@@ -53,9 +53,9 @@ export default function PostCard({userPost, id}) {
 //عشان حوار انها تتعدل قدام اليوزر علطول 
     const { mutate: likeMutate, isPending: isLiking } = useMutation({
         mutationFn: toggleLike,
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['allPosts'] });
-            await queryClient.invalidateQueries({ queryKey: ['SinglePost', _id] });
+        onSuccess:  () => {
+             queryClient.invalidateQueries({ queryKey: ['allPosts'] });
+             queryClient.invalidateQueries({ queryKey: ['SinglePost', _id] });
         }
     });
     /****************************************************************************************************************/
@@ -71,8 +71,9 @@ export default function PostCard({userPost, id}) {
     //لو عمل ديليت  يرجعوا لصفحه البوستات 
     const { mutateAsync: deleteAsync, isPending: isDeleting } = useMutation({
         mutationFn: deletePost,
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['allPosts'] });
+        onSuccess:  () => {
+             queryClient.invalidateQueries({ queryKey: ['allPosts'] });
+        
             if (id) navigate('/posts');
         }
     });

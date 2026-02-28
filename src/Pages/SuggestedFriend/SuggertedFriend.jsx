@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
 import { UserAdd } from 'iconsax-reactjs';
-
+import toast from 'react-hot-toast';
 function getSuggestions() {
     return axios.get('https://route-posts.routemisr.com/users/suggestions?limit=5', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -22,9 +22,11 @@ function UserCard({ user }) {
     const queryClient = useQueryClient();
 
     const { mutate: toggleFollow, isPending } = useMutation({
-        mutationFn: followUser(user._id),
-        onSuccess: () => {
+        mutationFn: ()=> followUser(user._id),
+        onSuccess: (res) => {
             queryClient.invalidateQueries({ queryKey: ['suggestions'] });
+             queryClient.invalidateQueries({ queryKey: ['userData'] });
+              toast.success(res.data.message);
         }
     });
 
