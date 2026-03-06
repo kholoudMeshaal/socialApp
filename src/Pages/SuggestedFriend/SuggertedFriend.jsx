@@ -18,6 +18,7 @@ function followUser(userId) {
     );
 }
 
+
 function UserCard({ user }) {
     const queryClient = useQueryClient();
 

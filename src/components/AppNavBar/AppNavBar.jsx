@@ -94,7 +94,16 @@ myForm.append('photo' , profileImage.current.files[0])
          <NavLink className={function({isActive}){return isActive? "text-white p-2 rounded-full  bg-slate-400": "" }}  to="/profile">
             Profile
           </NavLink>
-           
+           {userData && (
+  <NavbarItem>
+    <NavLink 
+      className={({ isActive }) => isActive ? "text-white p-2 rounded-full bg-slate-400" : ""} 
+      to="/notifications"
+    >
+       Notifications
+    </NavLink>
+  </NavbarItem>
+)}
     
       </NavbarContent>
 
@@ -164,6 +173,23 @@ myForm.append('photo' , profileImage.current.files[0])
       <hr className="my-2 border-gray-200" />
 
     
+
+  
+{/* Notification Link for Mobile Menu */}
+
+    <NavbarMenuItem>
+      <Link 
+        className="w-full text-lg text-blue-600 font-medium flex justify-between items-center" 
+        to="/notifications" 
+        onClick={() => setIsMenuOpen(false)}
+      >
+        Notifications
+    
+        <span className="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full">New</span>
+      </Link>
+    </NavbarMenuItem>
+    <hr className="my-2 border-gray-200" />
+
       <NavbarMenuItem>
         <button 
           className="w-full text-left text-danger" 
@@ -175,7 +201,7 @@ myForm.append('photo' , profileImage.current.files[0])
           Log Out
         </button>
       </NavbarMenuItem>
-  
+
 </NavbarMenu>
 
 

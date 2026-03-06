@@ -8,7 +8,7 @@ import AuthProtectedRoute from "./AuthProtectedRoute/AuthProtectedRoute";
 import PostDetails from "../Pages/SinglePost/SinglePost";
 import ChangePassword from "../components/ChangePass/ChangePass";
 import Profile from "../components/Profile/Profile";
-// import Notification from "../Pages/Notfication/Notification";
+import Notification from "../Pages/Notfication/Notification";
 
 export const myRouter = createBrowserRouter([
 
@@ -22,10 +22,7 @@ export const myRouter = createBrowserRouter([
     path: "/", 
     element: <Layout />, 
     children: [
-      { 
-        path: 'posts',
-        element: <Posts /> 
-      },
+    
      
       { 
         path: 'posts', 
@@ -41,7 +38,7 @@ export const myRouter = createBrowserRouter([
       },
       {path: "/change-password", element: <ChangePassword />} ,
       { path: 'profile', element: <Profile /> } , 
-      // { path: 'notifications', element: <ProtectedRoute><Notification /></ProtectedRoute> }
+      { path: 'notifications', element: <ProtectedRoute><Notification /></ProtectedRoute> }
     ]
   }
 ]);
